@@ -12,8 +12,11 @@ from datetime import datetime
 import re
 
 
-recformat = re.compile(r'(?P<year>\d{4})-(?P<month>\d{2})-(?P<day>\d{2})_' +
+recformat1 = re.compile(r'(?P<year>\d{4})-(?P<month>\d{2})-(?P<day>\d{2})_' +
       r'(?P<hour>\d{2})(?P<min>\d{2})(?P<sec>\d{2})(?P<milli>\d{3})\.mp4')
+
+recformat2 = re.compile(r'(?P<year>\d{4})-(?P<month>\d{2})-(?P<day>\d{2})_' +
+      r'(?P<hour>\d{2})-(?P<min>\d{2})-(?P<sec>\d{2})\.mp4')
 
 def get_recordings(path):
   """Get all correctly formatted recordings, their modified time, size and
@@ -21,7 +24,9 @@ def get_recordings(path):
   files = [rec for rec in os.listdir(path) if rec.endswith('.mp4')]
   recordings = []
   for name in files:
-      recnameparse = recformat.match(name)
+      recnameparse = recformat1.match(name)
+      if not recnameparse:
+	recnameparse = recformat2.match(name)
       if recnameparse:
           name_ts = datetime(
                   int(recnameparse.group('year')),

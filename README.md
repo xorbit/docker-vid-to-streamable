@@ -10,10 +10,12 @@ The [Python](https://www.python.org/) based stream manager monitors the recordin
 
 ## Recording file format
 
-The stream manager expects to find streams in the following format:
+The stream manager expects to find streams in the following formats:
 
 ```
 <YYYY>-<MM>-<DD>_<hh><mm><ss><fff>.mp4
+or
+<YYYY>-<MM>-<DD>_<hh>-<mm>-<ss>.mp4
 
 where
 
